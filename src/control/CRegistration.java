@@ -1,21 +1,22 @@
 package control;
 
-import dataAccessObject.DMember;
+import dataAccessObject.DRegistration;
 import valueObject.OMember;
 
 public class CRegistration {
-	private DMember dMember;
+	private DRegistration dRegistration;
 	
 	public CRegistration() {
-		this.dMember = new DMember();
+		this.dRegistration = new DRegistration();
 	}
 
 	public void saveMember(OMember oMember) {
-		this.dMember.save(oMember);
+		this.dRegistration.save(oMember);
 	}
 	
-	public void readMember() {
-		OMember oMember =  this.dMember.read();
+	public void findMemberById(String id) {
+		OMember oMember =  this.dRegistration.read(id);
+		System.out.println(oMember);
 	}
 
 }
