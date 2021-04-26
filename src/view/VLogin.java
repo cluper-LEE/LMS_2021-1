@@ -6,22 +6,22 @@ import control.CRegistration;
 import valueObject.OMember;
 
 public class VLogin {
+	private Scanner scanner;
 	private CRegistration cRegistration;
 
-	public VLogin() {
+	public VLogin(Scanner scanner) {
+		this.scanner = scanner;
 		this.cRegistration = new CRegistration();
 	}
 
 	public void show() {
-		System.out.println("VLogin::show");
-		
-		Scanner scanner = new Scanner(System.in);
+		System.out.println("로그인 화면입니다.");
 		
 		System.out.print("아이디 : ");
-		String id = scanner.next();
+		String id = this.scanner.next();
 		
 		System.out.print("비밀번호 : ");
-		String pswd = scanner.next();
+		String pswd = this.scanner.next();
 		
 		OMember oMember = cRegistration.findMemberById(id);
 		if(oMember == null) {

@@ -1,13 +1,17 @@
 package main;
 
+import java.util.Scanner;
+
 import view.VInitial;
 
 public class LMain {
 
+	private Scanner scanner;
 	private VInitial initial;
 	
-	public LMain() {
-		this.initial = new VInitial();
+	public LMain(Scanner scanner) {
+		this.scanner = scanner;
+		this.initial = new VInitial(scanner);
 	}
 	
 	public void run() {
@@ -16,8 +20,10 @@ public class LMain {
 	}
 	
 	public static void main(String[] args) {
-		LMain main = new LMain();
+		Scanner scanner = new Scanner(System.in);
+		LMain main = new LMain(scanner);
 		main.run();
+		scanner.close();
 	}
 
 }

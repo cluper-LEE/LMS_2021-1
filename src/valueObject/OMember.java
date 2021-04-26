@@ -5,8 +5,8 @@ import model.MMember;
 public class OMember {
 	private String id;
 	private String name;
-	private String address;
 	private String department;
+	private String address;
 	private String pswd;
 
 	public OMember() {
@@ -20,7 +20,7 @@ public class OMember {
 		this.department = department;
 		this.pswd = pswd;
 	}
-	
+
 	public OMember(MMember mMember) {
 		this.id = mMember.getId();
 		this.name = mMember.getName();
@@ -49,7 +49,7 @@ public class OMember {
 	public String getDepartment() {
 		return department;
 	}
-	
+
 	public String getPswd() {
 		return pswd;
 	}

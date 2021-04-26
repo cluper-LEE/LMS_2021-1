@@ -3,22 +3,23 @@ package view;
 import java.util.Scanner;
 
 public class VInitial {
+	private Scanner scanner;
 	private VRegistration registration;
 	private VLogin login;
 
-	public VInitial() {
-		this.registration = new VRegistration();
-		this.login = new VLogin();
+	public VInitial(Scanner scanner) {
+		this.scanner = scanner;
+		this.registration = new VRegistration(scanner);
+		this.login = new VLogin(scanner);
 
 	}
 
 	public void show() {
 		System.out.println("다음 기능을 선택하세요");
-		Scanner scanner = new Scanner(System.in);
-
+		
 		while (true) {
 			System.out.println("로그인(1), 회원등록(2), 종료(0)");
-			String input = scanner.next();
+			String input = this.scanner.next();
 			if (input.equals("1")) {
 				this.login.show();
 				break;

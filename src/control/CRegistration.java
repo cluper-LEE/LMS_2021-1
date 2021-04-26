@@ -11,6 +11,7 @@ public class CRegistration {
 	}
 
 	public void saveMember(OMember oMember) {
+		// oMember를 DAO에 전달
 		this.dRegistration.save(oMember);
 	}
 	
