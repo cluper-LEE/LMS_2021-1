@@ -14,9 +14,9 @@ public class CRegistration {
 		this.dRegistration.save(oMember);
 	}
 	
-	public void findMemberById(String id) {
+	public OMember findMemberById(String id) {
 		OMember oMember =  this.dRegistration.read(id);
-		System.out.println(oMember);
+		return oMember;
 	}
 
 }

@@ -7,16 +7,18 @@ public class MMember {
 	private String name;
 	private String address;
 	private String department;
+	private String pswd;
 	
 	public MMember() {
 		
 	}
 	
-	public MMember(String id, String name, String address, String department) {
+	public MMember(String id, String name, String address, String department, String pswd) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.department = department;
+		this.pswd = pswd;
 	}
 	
 	
@@ -25,6 +27,7 @@ public class MMember {
 		this.name = oMember.getName();
 		this.address = oMember.getAddress();
 		this.department = oMember.getDepartment();
+		this.pswd = oMember.getPswd();
 	}
 
 	
@@ -43,6 +46,10 @@ public class MMember {
 
 	public String getDepartment() {
 		return department;
+	}
+	
+	public String getPswd() {
+		return pswd;
 	}
 
 	public String toString() {

@@ -29,8 +29,22 @@ public class VRegistration {
 		scanner.nextLine();
 		String address = scanner.nextLine();
 		
+		String pswd;
+		while(true) {
+			System.out.print("비밀번호 : ");
+			pswd = scanner.next();
+			System.out.print("비밀번호 확인 : ");
+			if(pswd.equals(scanner.next())) {
+				break;
+			}else {
+				System.out.println("일치하지 않습니다. 다시 입력하세요.");
+			}
+		}
 		
-		OMember oMember = new OMember(id, name, address, department);
+		
+		
+		
+		OMember oMember = new OMember(id, name, address, department, pswd);
 		// 데이터 입력 받아 oMember에 저장
 		
 		
