@@ -11,17 +11,19 @@ public class MMember {
 	private String name;
 	private String address;
 	private String department;
+	private int birthYear;
 	private String pswd;
 
 	public MMember() {
 
 	}
 
-	public MMember(String id, String name, String address, String department, String pswd) {
+	public MMember(String id, String name, String address, String department, int birthYear, String pswd) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.department = department;
+		this.birthYear = birthYear;
 		this.pswd = pswd;
 	}
 
@@ -30,6 +32,7 @@ public class MMember {
 		this.name = oMember.getName();
 		this.address = oMember.getAddress();
 		this.department = oMember.getDepartment();
+		this.birthYear = oMember.getBirthYear();
 		this.pswd = oMember.getPswd();
 	}
 
@@ -45,6 +48,9 @@ public class MMember {
 	public String getDepartment() {
 		return department;
 	}
+	public int getBirthYear() {
+		return birthYear;
+	}
 	public String getPswd() {
 		return pswd;
 	}
@@ -56,7 +62,7 @@ public class MMember {
 	public void save(BufferedWriter bufferedWriter, OMember oMember) {
 		this.set(oMember);
 		try {
-			String input = String.join("\n", this.id, this.name, this.address, this.department, this.pswd);
+			String input = String.join("\n", this.id, this.name, this.address, this.department, Integer.toString(this.birthYear), this.pswd);
 			input += "\n\n";
 			bufferedWriter.write(input);
 		} catch (IOException e) {
@@ -70,6 +76,7 @@ public class MMember {
 		this.pswd = oMember.getPswd();
 		this.name = oMember.getName();
 		this.department = oMember.getDepartment();
+		this.birthYear = oMember.getBirthYear();
 		this.address = oMember.getAddress();
 	}
 
@@ -88,7 +95,8 @@ public class MMember {
 					this.name = attributes[1];
 					this.address = attributes[2];
 					this.department = attributes[3];
-					this.pswd = attributes[4];
+					this.birthYear = Integer.parseInt(attributes[4]);
+					this.pswd = attributes[5];
 					break;
 				}
 			}
