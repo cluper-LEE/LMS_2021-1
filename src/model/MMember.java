@@ -1,8 +1,8 @@
 package model;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 import valueObject.OMember;
 
@@ -11,19 +11,17 @@ public class MMember {
 	private String name;
 	private String address;
 	private String department;
-	private int birthYear;
 	private String pswd;
 
 	public MMember() {
 
 	}
 
-	public MMember(String id, String name, String address, String department, int birthYear, String pswd) {
+	public MMember(String id, String name, String address, String department, String pswd) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.department = department;
-		this.birthYear = birthYear;
 		this.pswd = pswd;
 	}
 
@@ -32,7 +30,6 @@ public class MMember {
 		this.name = oMember.getName();
 		this.address = oMember.getAddress();
 		this.department = oMember.getDepartment();
-		this.birthYear = oMember.getBirthYear();
 		this.pswd = oMember.getPswd();
 	}
 
@@ -48,9 +45,6 @@ public class MMember {
 	public String getDepartment() {
 		return department;
 	}
-	public int getBirthYear() {
-		return birthYear;
-	}
 	public String getPswd() {
 		return pswd;
 	}
@@ -62,8 +56,8 @@ public class MMember {
 	public void save(BufferedWriter bufferedWriter, OMember oMember) {
 		this.set(oMember);
 		try {
-			String input = String.join("\n", this.id, this.name, this.address, this.department, Integer.toString(this.birthYear), this.pswd);
-			input += "\n\n";
+			String input = String.join("\n", this.id, this.name, this.address, this.department, this.pswd);
+			input += "\n";
 			bufferedWriter.write(input);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -76,32 +70,19 @@ public class MMember {
 		this.pswd = oMember.getPswd();
 		this.name = oMember.getName();
 		this.department = oMember.getDepartment();
-		this.birthYear = oMember.getBirthYear();
 		this.address = oMember.getAddress();
 	}
 
-	public void read(BufferedReader bufferedReader, String id) {
-		try {
-			while (bufferedReader.ready()) {
-				String output = bufferedReader.readLine();
-				String ret = output + '\n';
-				while (!output.equals("")) {
-					output = bufferedReader.readLine();
-					ret += output + '\n';
-				}
-				String[] attributes = ret.split("\n");
-				if (attributes[0].equals(id)) {
-					this.id = attributes[0];
-					this.name = attributes[1];
-					this.address = attributes[2];
-					this.department = attributes[3];
-					this.birthYear = Integer.parseInt(attributes[4]);
-					this.pswd = attributes[5];
-					break;
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+	
+	public boolean read(Scanner scanner) {
+		while(scanner.hasNext()) {
+			this.id = scanner.nextLine();
+			this.name = scanner.nextLine();
+			this.address = scanner.nextLine();
+			this.department = scanner.nextLine();
+			this.pswd = scanner.nextLine();
+			return true;
 		}
+		return false;
 	}
 }

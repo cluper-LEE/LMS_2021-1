@@ -1,7 +1,5 @@
 package valueObject;
 
-import java.util.Calendar;
-
 import model.MMember;
 
 public class OMember {
@@ -9,19 +7,17 @@ public class OMember {
 	private String name;
 	private String department;
 	private String address;
-	int birthYear;
 	private String pswd;
 
 	public OMember() {
 
 	}
 
-	public OMember(String id, String name, String address, String department, int birthYear, String pswd) {
+	public OMember(String id, String name, String address, String department, String pswd) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.department = department;
-		this.birthYear = birthYear;
 		this.pswd = pswd;
 	}
 
@@ -30,37 +26,41 @@ public class OMember {
 		this.name = mMember.getName();
 		this.address = mMember.getAddress();
 		this.department = mMember.getDepartment();
-		this.birthYear = mMember.getBirthYear();
 		this.pswd = mMember.getPswd();
 	}
 
 	public String toString() {
-		return "[이름 : " + this.name + ", 학번 : " + this.id + ", 주소 : " + this.address + ", 학과 : " + this.department + ", 생년 : " + this.birthYear
+		return "[이름 : " + this.name + ", 학번 : " + this.id + ", 주소 : " + this.address + ", 학과 : " + this.department 
 				+ "]";
 	}
 
 	public String getId() {
 		return id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public String getAddress() {
+
 		return address;
 	}
-
 	public String getDepartment() {
+
 		return department;
 	}
+	public String getPswd() {
 
-	public int getBirthYear() {
-		return birthYear;
+
+		return pswd;
 	}
 
-	public String getPswd() {
-		return pswd;
+	
+	public void set(MMember mMember) {
+		this.id = mMember.getId();
+		this.name = mMember.getName();
+		this.address = mMember.getName();
+		this.department = mMember.getDepartment();
+		this.pswd = mMember.getPswd();
 	}
 
 }

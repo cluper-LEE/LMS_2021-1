@@ -1,10 +1,10 @@
 package dataAccessObject;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 import model.MMember;
 import valueObject.OMember;
@@ -29,11 +29,18 @@ public class DRegistration {
 		// mMember를 통해 Data read
 		// oMember 생성
 		// mMember에서 oMember로 데이터 이동
-		try(BufferedReader bufferedReader = new BufferedReader(new FileReader("members.txt"))){
-			MMember mMember = new MMember();
-			mMember.read(bufferedReader, id);
-			return new OMember(mMember);
-		}catch(IOException e) {
+		try {
+		File file = new File("members.txt");
+		Scanner scanner = new Scanner(file);
+		MMember mMember = new MMember();
+		while(mMember.read(scanner)) {
+			if(mMember.getId().equals(id)) {
+				OMember oMember = new OMember();
+				oMember.set(mMember);
+				return oMember;
+			}
+		}
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;

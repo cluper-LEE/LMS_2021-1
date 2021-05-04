@@ -2,16 +2,17 @@ package view;
 
 import java.util.Scanner;
 
-import control.CRegistration;
+import control.CLogin;
+import valueObject.OLogin;
 import valueObject.OMember;
 
 public class VLogin {
 	private Scanner scanner;
-	private CRegistration cRegistration;
+	private CLogin cLogin;
 
 	public VLogin(Scanner scanner) {
 		this.scanner = scanner;
-		this.cRegistration = new CRegistration();
+		this.cLogin = new CLogin();
 	}
 
 	public void show() {
@@ -23,8 +24,10 @@ public class VLogin {
 			System.out.print("비밀번호 : ");
 			String pswd = this.scanner.next();
 
-			OMember oMember = cRegistration.findMemberById(id);
-			if (oMember.getId() == null) {
+			OLogin oLogin = new OLogin(id, pswd);
+			OMember oMember = this.cLogin.validate(oLogin);
+			
+			if (oMember == null) {
 				System.out.println("회원 정보를 찾지 못했습니다. 입력을 확인해주세요.");
 			} else {
 				if (pswd.equals(oMember.getPswd())) {

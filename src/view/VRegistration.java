@@ -23,9 +23,6 @@ public class VRegistration {
 		System.out.print("학번(아이디) : ");
 		String id = this.scanner.next();
 		
-		System.out.print("생년4자리(ex.1998) : ");
-		int birthYear = this.scanner.nextInt();
-		
 		System.out.print("학과 : ");
 		String department = this.scanner.next();
 		
@@ -45,7 +42,7 @@ public class VRegistration {
 			}
 		}
 		
-		OMember oMember = new OMember(id, name, address, department, birthYear, pswd);
+		OMember oMember = new OMember(id, name, address, department, pswd);
 		// 데이터 입력 받아 oMember에 저장
 		// oMember를 컨트롤러에 전달.
 		this.cRegistration.saveMember(oMember);
