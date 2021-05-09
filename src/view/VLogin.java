@@ -15,7 +15,7 @@ public class VLogin {
 		this.cLogin = new CLogin();
 	}
 
-	public void show() {
+	public OMember show() {
 		System.out.println("로그인 화면입니다.");
 		while (true) {
 			System.out.print("아이디(학번) : ");
@@ -33,11 +33,11 @@ public class VLogin {
 				if (pswd.equals(oMember.getPswd())) {
 					System.out.println(oMember.getName() + "님 환영합니다.");
 					System.out.println("로그인 정보 : " + oMember.toString() + " 비밀번호는 표시하지 않습니다.");
-					break;
 				} else {
 					System.out.println("비밀번호가 일치하지 않습니다.");
 				}
 			}
+			return oMember;
 		}
 	}
 

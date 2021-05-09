@@ -2,10 +2,13 @@ package view;
 
 import java.util.Scanner;
 
+import valueObject.OMember;
+
 public class VInitial {
 	private Scanner scanner;
 	private VRegistration registration;
 	private VLogin login;
+	private VEnrollment enrollment;
 
 	public VInitial(Scanner scanner) {
 		this.scanner = scanner;
@@ -21,7 +24,11 @@ public class VInitial {
 			System.out.println("로그인(1), 회원등록(2), 종료(0)");
 			String input = this.scanner.next();
 			if (input.equals("1")) {
-				this.login.show();
+				OMember oMember = this.login.show();
+				if(oMember != null) {
+					this.enrollment = new VEnrollment(this.scanner);
+					while(this.enrollment.show(oMember));
+				}
 				break;
 			} else if (input.equals("2")) {
 				this.registration.show();
