@@ -8,7 +8,7 @@ public class VInitial {
 	private Scanner scanner;
 	private VRegistration registration;
 	private VLogin login;
-	private VEnrollment enrollment;
+	private VLectureSearch lectureSearch;
 
 	public VInitial(Scanner scanner) {
 		this.scanner = scanner;
@@ -26,14 +26,12 @@ public class VInitial {
 			if (input.equals("1")) {
 				OMember oMember = this.login.show();
 				if(oMember != null) {
-					this.enrollment = new VEnrollment(this.scanner);
-					while(this.enrollment.show(oMember));
+					this.lectureSearch = new VLectureSearch(this.scanner);
+					this.lectureSearch.show(oMember);
 				}
 				break;
 			} else if (input.equals("2")) {
 				this.registration.show();
-				this.login.show();
-				break;
 			}else if(input.equals("0")){
 				System.out.println("프로그램을 종료합니다.");
 				break;

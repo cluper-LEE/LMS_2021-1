@@ -9,23 +9,23 @@ import valueObject.OIndex;
 
 public class DIndex {
 	
-	private static final String PATHNAME = "data/";
+	public static final String LECTURE_PATH = "lectures/";
+	
+	protected OIndex oIndex;
+	protected MIndex mIndex;
 	
 	public DIndex() {
-		// TODO Auto-generated constructor stub
+		this.oIndex = new OIndex();
+		this.mIndex = new MIndex();
 	}
 
 	public Vector<OIndex> readAll(String fileName) {
-		// mMember를 통해 Data read
-		// oMember 생성
-		// mMember에서 oMember로 데이터 이동
 		Vector<OIndex> indices = new Vector<>();
 		try {
-			File file = new File(PATHNAME + fileName);
+			File file = new File(LECTURE_PATH + fileName);
 			Scanner scanner = new Scanner(file);
-			MIndex mIndex = new MIndex();
 			while (mIndex.read(scanner)) {
-				OIndex oIndex = new OIndex();
+				oIndex = oIndex.getInstance();
 				oIndex.set(mIndex);
 				indices.add(oIndex);
 			}

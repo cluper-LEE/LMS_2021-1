@@ -24,6 +24,16 @@ public class OIndex {
 		
 	}
 	
+	public OIndex getInstance() {
+		return new OIndex();
+	}
+	
+	
+	@Override
+	public String toString() {
+		return this.id + " " + this.name;
+	}
+
 	public String getId() {
 		return id;
 	}

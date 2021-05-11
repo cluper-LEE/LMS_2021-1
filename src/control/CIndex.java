@@ -6,7 +6,7 @@ import dataAccessObject.DIndex;
 import valueObject.OIndex;
 
 public class CIndex {
-	private DIndex dIndex;
+	protected DIndex dIndex;
 	
 	public CIndex() {
 		this.dIndex = new DIndex();

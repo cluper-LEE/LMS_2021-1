@@ -1,11 +1,9 @@
 package valueObject;
 
+import model.MIndex;
 import model.MLecture;
 
-public class OLecture {
-
-	private String id;
-	private String name;
+public class OLecture extends OIndex {
 	private String profName;
 	private String credit;
 	private String time;
@@ -14,65 +12,57 @@ public class OLecture {
 
 	}
 
-	public OLecture(String id, String name, String profName, String credit, String hours) {
-		this.id = id;
-		this.name = name;
+	public OLecture(String id, String name, String profName, String credit, String time) {
+		super(id, name, "");
 		this.profName = profName;
 		this.credit = credit;
-		this.time = hours;
+		this.time = time;
 	}
+	
+	
 
-	public void set(MLecture mLecture) {
-		this.id = mLecture.getId();
-		this.name = mLecture.getName();
-		this.profName = mLecture.getProfName();
-		this.credit = mLecture.getCredit();
-		this.time = mLecture.getHours();
+	@Override
+	public OIndex getInstance() {
+		return new OLecture();
 	}
 
 	@Override
+	public void set(MIndex mIndex) {
+		super.set(mIndex);
+		MLecture mLecture = (MLecture)mIndex;
+		this.profName = mLecture.getProfName();
+		this.credit = mLecture.getCredit();
+		this.time = mLecture.getTime();
+	}
+	
+	@Override
 	public String toString() {
-		return id + " " + name + " " + profName + " " + credit + " " + time;
+		return super.getId() + " " + super.getName() + " " + profName + " " + credit + " " + time;
 	}
 
+
+	@Override
 	public String getId() {
-		return id;
+		// TODO Auto-generated method stub
+		return super.getId();
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getProfName() {
-		return profName;
-	}
-
-	public String getCredit() {
-		return credit;
-	}
-
-	public String getHours() {
-		return time;
-	}
-
+	@Override
 	public void setId(String id) {
-		this.id = id;
+		// TODO Auto-generated method stub
+		super.setId(id);
 	}
 
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return super.getName();
+	}
+
+	@Override
 	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setProfName(String profName) {
-		this.profName = profName;
-	}
-
-	public void setCredit(String credit) {
-		this.credit = credit;
-	}
-
-	public void setHours(String hours) {
-		this.time = hours;
+		// TODO Auto-generated method stub
+		super.setName(name);
 	}
 
 }

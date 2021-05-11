@@ -6,9 +6,7 @@ import java.util.Scanner;
 
 import valueObject.OLecture;
 
-public class MLecture {
-	private String id;
-	private String name;
+public class MLecture extends MIndex {
 	private String profName;
 	private String credit;
 	private String time;
@@ -16,19 +14,19 @@ public class MLecture {
 	public MLecture() {
 
 	}
-	
-	public MLecture(String id, String name, String profName, String credit, String hours) {
-		this.id = id;
-		this.name = name;
+
+	public MLecture(String id, String name, String profName, String credit, String time) {
+		super(id, name, "");
 		this.profName = profName;
 		this.credit = credit;
-		this.time = hours;
+		this.time = time;
 	}
 
+	@Override
 	public boolean read(Scanner scanner) {
-		if(scanner.hasNext()) {
-			this.id = scanner.next();
-			this.name = scanner.next();
+		if (scanner.hasNext()) {
+			super.setId(scanner.next());
+			super.setName(scanner.next());
 			this.profName = scanner.next();
 			this.credit = scanner.next();
 			this.time = scanner.next();
@@ -40,34 +38,59 @@ public class MLecture {
 	public void save(BufferedWriter bufferedWriter, OLecture oLecture) {
 		try {
 			String s = String.join("\n", oLecture.toString().split(" "));
+			s += "\n";
 			bufferedWriter.write(s);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	@Override
 	public String getId() {
-		return id;
+		// TODO Auto-generated method stub
+		return super.getId();
 	}
 
+	@Override
+	public void setId(String id) {
+		// TODO Auto-generated method stub
+		super.setId(id);
+	}
+
+	@Override
 	public String getName() {
-		return name;
+		// TODO Auto-generated method stub
+		return super.getName();
+	}
+
+	@Override
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		super.setName(name);
 	}
 
 	public String getProfName() {
 		return profName;
 	}
 
+	public void setProfName(String profName) {
+		this.profName = profName;
+	}
+
 	public String getCredit() {
 		return credit;
 	}
 
-	public String getHours() {
+	public void setCredit(String credit) {
+		this.credit = credit;
+	}
+
+	public String getTime() {
 		return time;
 	}
 
-
-	
-	
+	public void setTime(String time) {
+		this.time = time;
+	}
 
 }
