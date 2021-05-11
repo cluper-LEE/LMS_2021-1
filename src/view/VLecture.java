@@ -15,22 +15,19 @@ public class VLecture {
 		this.scanner = scanner;
 	}
 
-	public OLecture show(String fileName, String level) {
-		System.out.println(level + " 선택");
-		fileName = "data/" + fileName;
-		Vector<OLecture> lectures = cEnrollment.getAll(fileName);
+	public OLecture show(String fileName, String message) {
+		System.out.println(message + " 선택 하세요.");
+		Vector<OLecture> lectures = this.cEnrollment.getAll(fileName);
 		for(OLecture lecture : lectures) {
 			System.out.println(lecture.toString());
 		}
 		String id = this.scanner.next();
-		OLecture selected = null;
 		for(OLecture lecture : lectures) {
 			if(lecture.getId().equals(id)) {
-				selected = lecture;
-				break;
+				return lecture;
 			}
 		}
-		return selected;
+		return null;
 	}
 
 }

@@ -8,7 +8,9 @@ import model.MIndex;
 import valueObject.OIndex;
 
 public class DIndex {
-
+	
+	private static final String PATHNAME = "data/";
+	
 	public DIndex() {
 		// TODO Auto-generated constructor stub
 	}
@@ -19,7 +21,7 @@ public class DIndex {
 		// mMember에서 oMember로 데이터 이동
 		Vector<OIndex> indices = new Vector<>();
 		try {
-			File file = new File(fileName);
+			File file = new File(PATHNAME + fileName);
 			Scanner scanner = new Scanner(file);
 			MIndex mIndex = new MIndex();
 			while (mIndex.read(scanner)) {

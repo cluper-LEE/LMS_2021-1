@@ -6,23 +6,22 @@ import java.util.Vector;
 import control.CIndex;
 import valueObject.OIndex;
 
-public class VLectureSearch {
+public class VIndex {
 	private Scanner scanner;
 	private CIndex cIndex;
 	
-	public VLectureSearch(Scanner scanner) {
+	public VIndex(Scanner scanner) {
 		this.cIndex = new CIndex();
 		this.scanner = scanner;
 	}
 
-	public String show(String fileName, String level) {
-		System.out.println(level + " 선택");
-		String id = this.scanner.next();
-		fileName = "data/" + fileName;
+	public String show(String fileName, String message) {
+		System.out.println(message + " 선택 하세요.");
 		Vector<OIndex> indices = cIndex.getAll(fileName);
 		for(OIndex index : indices) {
 			System.out.println(index.getId() + " " + index.getName());
 		}
+		String id = this.scanner.next();
 		for(OIndex index : indices) {
 			if(index.getId().equals(id)) {
 				return index.getFileName();

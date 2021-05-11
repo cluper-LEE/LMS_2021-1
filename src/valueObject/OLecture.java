@@ -8,7 +8,7 @@ public class OLecture {
 	private String name;
 	private String profName;
 	private String credit;
-	private String hours;
+	private String time;
 
 	public OLecture() {
 
@@ -19,7 +19,7 @@ public class OLecture {
 		this.name = name;
 		this.profName = profName;
 		this.credit = credit;
-		this.hours = hours;
+		this.time = hours;
 	}
 
 	public void set(MLecture mLecture) {
@@ -27,12 +27,12 @@ public class OLecture {
 		this.name = mLecture.getName();
 		this.profName = mLecture.getProfName();
 		this.credit = mLecture.getCredit();
-		this.hours = mLecture.getHours();
+		this.time = mLecture.getHours();
 	}
 
 	@Override
 	public String toString() {
-		return id + " " + name + " " + profName + " " + credit + " " + hours;
+		return id + " " + name + " " + profName + " " + credit + " " + time;
 	}
 
 	public String getId() {
@@ -52,7 +52,27 @@ public class OLecture {
 	}
 
 	public String getHours() {
-		return hours;
+		return time;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setProfName(String profName) {
+		this.profName = profName;
+	}
+
+	public void setCredit(String credit) {
+		this.credit = credit;
+	}
+
+	public void setHours(String hours) {
+		this.time = hours;
 	}
 
 }

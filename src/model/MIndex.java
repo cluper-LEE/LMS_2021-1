@@ -18,7 +18,7 @@ public class MIndex {
 	}
 	
 	public boolean read(Scanner scanner) {
-		while(scanner.hasNext()) {
+		if(scanner.hasNext()) {
 			this.id = scanner.next();
 			this.name = scanner.next();
 			this.fileName = scanner.next();

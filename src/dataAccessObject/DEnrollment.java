@@ -12,6 +12,8 @@ import valueObject.OLecture;
 
 public class DEnrollment {
 
+	private static final String PATHNAME = "data/";
+	
 	public DEnrollment() {
 		// TODO Auto-generated constructor stub
 	}
@@ -22,7 +24,7 @@ public class DEnrollment {
 		// mMember에서 oMember로 데이터 이동
 		Vector<OLecture> lectures = new Vector<>();
 		try {
-			File file = new File(fileName);
+			File file = new File(PATHNAME + fileName);
 			Scanner scanner = new Scanner(file);
 			MLecture mLecture = new MLecture();
 			while (mLecture.read(scanner)) {

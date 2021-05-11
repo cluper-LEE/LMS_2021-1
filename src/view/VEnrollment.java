@@ -10,18 +10,18 @@ public class VEnrollment {
 
 	private Scanner scanner;
 
-	private VLectureSearch vCampus;
-	private VLectureSearch vCollege;
-	private VLectureSearch vDepartment;
+	private VIndex vCampus;
+	private VIndex vCollege;
+	private VIndex vDepartment;
 	private VLecture vLecture;
 
 	private CEnrollment cEnrollment;
 
 	public VEnrollment(Scanner scanner) {
 		this.scanner = scanner;
-		this.vCampus = new VLectureSearch(this.scanner);
-		this.vCollege = new VLectureSearch(this.scanner);
-		this.vDepartment = new VLectureSearch(this.scanner);
+		this.vCampus = new VIndex(this.scanner);
+		this.vCollege = new VIndex(this.scanner);
+		this.vDepartment = new VIndex(this.scanner);
 		this.vLecture = new VLecture(this.scanner);
 		this.cEnrollment = new CEnrollment();
 	}
@@ -30,18 +30,17 @@ public class VEnrollment {
 		System.out.println(oMember.getName() + "님 환영합니다.");
 		System.out.println("수강신청 화면입니다.");
 
-		String campusFileName = this.vCampus.show("root", "campus");
-		String collegeFileName = this.vCollege.show(campusFileName, "college");
-		String departmentFileName = this.vDepartment.show(collegeFileName, "department");
-		OLecture oLecture = this.vLecture.show(departmentFileName, "lecture");
-		if (oLecture != null) {
-			cEnrollment.saveLecture(oLecture);
-			System.out.println(oLecture.toString() + " 강좌를 신청 내역에 추가하였습니다.");
-			return true;
-		} else {
-			System.out.println("신청에 실패하였습니다.");
-			return false;
+		String campusFileName = this.vCampus.show("root", "캠퍼스를");
+		if (campusFileName != null) {
+			String collegeFileName = this.vCollege.show(campusFileName, "대학을");
+			if (collegeFileName != null) {
+				String departmentFileName = this.vDepartment.show(collegeFileName, "학과를");
+				if (departmentFileName != null) {
+					OLecture oLecture = this.vLecture.show(departmentFileName, "강좌를");
+				}
+			}
 		}
+		return true;
 
 	}
 
