@@ -11,27 +11,36 @@ import valueObject.OMember;
 
 public class DRegistration {
 
-	public static final String USER_PATH = "members.txt";
+	public static final String USER_PATH = "members/";
+	private MMember mMember;
+	
 
 	public DRegistration() {
 	}
 
-	public void save(OMember oMember) {
-		File file = new File(DRegistration.USER_PATH);
+	public boolean save(OMember oMember) {
+		File file = new File(DRegistration.USER_PATH + oMember.getId());
+		if(file.exists()) { // 이미 파일이 존재하면
+			return false;
+		}
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
 			// oMember에서 mMember로 데이터를 이동
 			// mMember를 통해서 파일에 저장
-			MMember mMember = new MMember();
+			this.mMember = new MMember();
 			mMember.save(bufferedWriter, oMember);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return true;
 	}
 
 	public OMember read(String id) {
-		File file = new File(DRegistration.USER_PATH);
+		File file = new File(DRegistration.USER_PATH + id);
+		if(!file.exists()) {
+			return null;
+		}
 		try(Scanner scanner = new Scanner(file)) {
-			MMember mMember = new MMember();
+			this.mMember = new MMember();
 			while (mMember.read(scanner)) {
 				if (mMember.getId().equals(id)) {
 					OMember oMember = new OMember();

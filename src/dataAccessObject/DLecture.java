@@ -9,12 +9,15 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import model.MLecture;
+import model.MTime;
 import valueObject.OLecture;
 
 public class DLecture extends DIndex {
 
 	public static final String BASKET_PATH = "baskets/";
 	public static final String ENROLLMENT_PATH = "enrollment_lists/";
+
+	private MLecture mLecture;
 
 	public DLecture() {
 		super.oIndex = new OLecture();
@@ -32,13 +35,15 @@ public class DLecture extends DIndex {
 	}
 
 	public boolean saveInFile(String path, OLecture oLecture) {
-		if (this.fileExists(path)) {
+		File file = new File(path);
+		if (file.exists()) {
 			if (this.lectureExists(path, oLecture)) {
+				// 이미 신청한 강좌라면 false 반환.
 				return false;
 			}
 		}
-		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, true))) {
-			MLecture mLecture = new MLecture();
+		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
+			this.mLecture = new MLecture();
 			mLecture.save(bufferedWriter, oLecture);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -47,17 +52,17 @@ public class DLecture extends DIndex {
 		return true;
 	}
 
-	public boolean fileExists(String path) {
-		return new File(path).exists();
-	}
-
 	public boolean lectureExists(String path, OLecture oLecture) {
 		File file = new File(path);
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-			MLecture mLecture = new MLecture();
+			this.mLecture = new MLecture();
 			Scanner scanner = new Scanner(file);
 			while (mLecture.read(scanner)) {
 				if (mLecture.getId().equals(oLecture.getId())) {
+					return true;
+				}
+				if (new MTime(mLecture.getTime()).checkOverlap(new MTime(oLecture.getTime()))) {
+					System.out.println("시간 중복");
 					return true;
 				}
 			}

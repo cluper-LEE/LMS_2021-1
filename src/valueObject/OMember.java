@@ -2,23 +2,20 @@ package valueObject;
 
 import model.MMember;
 
-public class OMember {
-	private String id;
+public class OMember extends OLogin {
 	private String name;
 	private String department;
 	private String address;
-	private String pswd;
 
 	public OMember() {
-
+		
 	}
 
 	public OMember(String id, String name, String address, String department, String pswd) {
-		this.id = id;
+		super(id, pswd);
 		this.name = name;
 		this.address = address;
 		this.department = department;
-		this.pswd = pswd;
 	}
 
 	public OMember(MMember mMember) {
@@ -41,16 +38,12 @@ public class OMember {
 		return name;
 	}
 	public String getAddress() {
-
 		return address;
 	}
 	public String getDepartment() {
-
 		return department;
 	}
 	public String getPswd() {
-
-
 		return pswd;
 	}
 

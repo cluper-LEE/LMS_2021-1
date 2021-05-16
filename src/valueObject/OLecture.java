@@ -65,4 +65,28 @@ public class OLecture extends OIndex {
 		super.setName(name);
 	}
 
+	public String getProfName() {
+		return profName;
+	}
+
+	public void setProfName(String profName) {
+		this.profName = profName;
+	}
+
+	public String getCredit() {
+		return credit;
+	}
+
+	public void setCredit(String credit) {
+		this.credit = credit;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 }

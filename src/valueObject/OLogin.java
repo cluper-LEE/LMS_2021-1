@@ -1,8 +1,8 @@
 package valueObject;
 
 public class OLogin {
-	private String id;
-	private String pswd;
+	protected String id;
+	protected String pswd;
 
 	public OLogin() {
 

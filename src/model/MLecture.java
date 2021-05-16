@@ -29,7 +29,7 @@ public class MLecture extends MIndex {
 			super.setName(scanner.next());
 			this.profName = scanner.next();
 			this.credit = scanner.next();
-			this.time = scanner.next();
+			this.time = MTime.getNormalizedTime(scanner.next());
 			return true;
 		}
 		return false;
