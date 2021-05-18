@@ -1,14 +1,12 @@
-package main;
+package textView;
 
 import java.util.Scanner;
 
-import view.VInitial;
-
-public class LMain {
+public class VMain {
 
 	private VInitial initial;
 	
-	public LMain(Scanner scanner) {
+	public VMain(Scanner scanner) {
 		this.initial = new VInitial(scanner);
 	}
 	
@@ -19,7 +17,7 @@ public class LMain {
 	
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		LMain main = new LMain(scanner);
+		VMain main = new VMain(scanner);
 		main.run();
 		scanner.close();
 	}
