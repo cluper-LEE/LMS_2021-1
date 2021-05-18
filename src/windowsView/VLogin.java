@@ -40,61 +40,31 @@ public class VLogin extends JFrame{
 		panel.setMaximumSize(new Dimension(400, 300));
 		this.setContentPane(panel);
 		
-		GridBagConstraints[] gbc = new GridBagConstraints[CONTENT_SIZE];
-		for(int i = 0; i < this.CONTENT_SIZE; i++) {
-			gbc[i] = new GridBagConstraints();
-			gbc[i].insets = new Insets(10, 10, 10, 10);
-			gbc[i].weightx = 1;
-			gbc[i].weighty = 1;
-		}
-		
-		
 		JLabel loginLabel = new JLabel("아이디(학번)");
-		gbc[0].gridx = 0;
-		gbc[0].gridy = 0;
-		panel.add(loginLabel, gbc[0]);
+		panel.add(loginLabel, this.getGbc(0, 0));
 		
 		JLabel passwordLabel = new JLabel("비밀번호");
-		gbc[1].gridx = 0;
-		gbc[1].gridy = 1;
-		panel.add(passwordLabel, gbc[1]);
+		panel.add(passwordLabel, this.getGbc(0, 1));
 		
 		this.idText = new JTextField(20);
-		gbc[2].gridx = 1;
-		gbc[2].gridy = 0;
-		gbc[2].gridwidth = 4;
-		gbc[2].fill = GridBagConstraints.BOTH;
-		panel.add(this.idText, gbc[2]);
+		panel.add(this.idText, this.getGbc(1, 0, 4, 1));
 		
 		this.passwordText = new JPasswordField(20);
-		gbc[3].gridx = 1;
-		gbc[3].gridy = 1;
-		gbc[3].gridwidth = 4;
-		gbc[3].fill = GridBagConstraints.BOTH;
-		panel.add(this.passwordText, gbc[3]);
+		panel.add(this.passwordText, this.getGbc(1, 1, 4, 1));
 		
 		
 		JButton loginButton = new JButton("로그인");
-		gbc[4].gridx = 0;
-		gbc[4].gridy = 3;
-		gbc[4].gridwidth = 5;
-		gbc[4].fill = GridBagConstraints.BOTH;
-		panel.add(loginButton, gbc[4]);
+		panel.add(loginButton, this.getGbc(0, 3, 5, 1));
+		this.getRootPane().setDefaultButton(loginButton);
 		
 		JButton registrationButton = new JButton("회원가입");
-		gbc[5].gridx = 0;
-		gbc[5].gridy = 4;
-		gbc[5].gridwidth = 5;
-		gbc[5].fill = GridBagConstraints.BOTH;
-		panel.add(registrationButton, gbc[5]);
+		panel.add(registrationButton, this.getGbc(0, 4, 5, 1));
 		
 		JLabel idValidText = new JLabel();
 		idValidText.setForeground(Color.red);
-		gbc[6].gridx = 0;
-		gbc[6].gridy = 2;
-		gbc[6].gridwidth = 5;
-		gbc[6].fill = GridBagConstraints.BOTH;
-		panel.add(idValidText, gbc[6]);
+		GridBagConstraints idValidTextGbc = this.getGbc(0, 2, 5, 1);
+		idValidTextGbc.insets = new Insets(0, 10, 0, 10);
+		panel.add(idValidText, idValidTextGbc);
 		
 		
 		// 텍스트 필드에 포커스 리스너 추가
@@ -126,6 +96,9 @@ public class VLogin extends JFrame{
 		loginButton.addActionListener((e) -> {
 			String id = this.idText.getText();
 			String password = this.passwordText.getText();
+			if(id.equals("") || password.equals("")) {
+				return;
+			}
 			OLogin oLogin = new OLogin(id, password);
 			OMember oMember = cLogin.validate(oLogin);
 			System.out.println(oMember);
@@ -136,12 +109,30 @@ public class VLogin extends JFrame{
 			}else {
 				new VLogin();
 				this.dispose();
-				System.out.println("종료?");
 			}
 		});
 		
 		this.setVisible(true);
 		
+	}
+	
+	private GridBagConstraints getGbc(int x, int y) {
+		GridBagConstraints gbc = new GridBagConstraints();
+
+		gbc.gridx = x;
+		gbc.gridy = y;
+		gbc.insets = new Insets(10, 10, 10, 10);
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		return gbc;
+	}
+	
+	private GridBagConstraints getGbc(int x, int y, int width, int height) {
+		GridBagConstraints gbc = this.getGbc(x, y);
+		gbc.gridwidth = width;
+		gbc.gridheight = height;
+		gbc.fill = GridBagConstraints.BOTH;
+		return gbc;
 	}
 
 }
