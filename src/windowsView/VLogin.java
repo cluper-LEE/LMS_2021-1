@@ -7,6 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,6 +32,8 @@ public class VLogin extends JFrame{
 	
 	private final int CONTENT_SIZE = 7;
 	private final String ID_VALID_MSG = "아이디에는 숫자만 입력할 수 있습니다";
+	private final String ID_BLANK_MSG = "아이디를 입력하세요";
+	private final String PSWD_BLANK_MSG = "비밀번호를 입력하세요"; 
 	
 	public VLogin() {
 		this.setTitle("login");
@@ -60,43 +65,42 @@ public class VLogin extends JFrame{
 		JButton registrationButton = new JButton("회원가입");
 		panel.add(registrationButton, this.getGbc(0, 4, 5, 1));
 		
-		JLabel idValidText = new JLabel();
-		idValidText.setForeground(Color.red);
+		JLabel validText = new JLabel();
+		validText.setForeground(Color.red);
 		GridBagConstraints idValidTextGbc = this.getGbc(0, 2, 5, 1);
 		idValidTextGbc.insets = new Insets(0, 10, 0, 10);
-		panel.add(idValidText, idValidTextGbc);
+		panel.add(validText, idValidTextGbc);
 		
-		
-		// 텍스트 필드에 포커스 리스너 추가
-		FocusListener textFocusListener = new FocusListener() {
-			
+		KeyAdapter keyAdapter = new KeyAdapter() {
 			@Override
-			public void focusLost(FocusEvent e) {
+			public void keyPressed(KeyEvent e) {
 				String id = idText.getText();
 				try {
 					Integer.parseInt(id);
-					idValidText.setText("");
+					validText.setText("");
 				}catch(NumberFormatException ex) {
-					System.out.println("숫자가 아님");
-					idValidText.setText(ID_VALID_MSG);
+					validText.setText(ID_VALID_MSG);
 				}
 			}
 			
-			@Override
-			public void focusGained(FocusEvent e) {
-				JTextField target = (JTextField) e.getComponent();
-				target.selectAll();
-			}
 		};
-		
-		this.idText.addFocusListener(textFocusListener);
-		this.passwordText.addFocusListener(textFocusListener);
+		this.idText.addKeyListener(keyAdapter);
+		this.passwordText.addKeyListener(keyAdapter);
 		
 		this.cLogin = new CLogin();
 		loginButton.addActionListener((e) -> {
 			String id = this.idText.getText();
 			String password = this.passwordText.getText();
-			if(id.equals("") || password.equals("")) {
+			if(id.equals("")) {
+				this.idText.requestFocus();
+				this.idText.selectAll();
+				validText.setText(this.ID_BLANK_MSG);
+				return;
+			}
+			if(password.equals("")) {
+				this.passwordText.requestFocus();
+				this.passwordText.selectAll();
+				validText.setText(this.PSWD_BLANK_MSG);
 				return;
 			}
 			OLogin oLogin = new OLogin(id, password);
@@ -109,6 +113,7 @@ public class VLogin extends JFrame{
 			}else {
 				new VLogin();
 				this.dispose();
+				// return oMember;
 			}
 		});
 		
