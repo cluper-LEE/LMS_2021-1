@@ -2,14 +2,14 @@ package windowsView;
 
 import javax.swing.JPanel;
 
-import control.CIndex;
-
 public class VLectureSearch extends JPanel {
+	// attributes
+	private static final long serialVersionUID = 1L;
 
-	private CIndex cIndex;
+	// components
 	
 	public VLectureSearch() {
-		
+		super();
 	}
 
 }

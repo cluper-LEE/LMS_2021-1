@@ -5,11 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,13 +21,13 @@ import valueObject.OLogin;
 import valueObject.OMember;
 
 public class VLogin extends JFrame{
-	
+	private static final long serialVersionUID = 1L;
+
 	private CLogin cLogin;
 
 	private JTextField idText;
 	private JTextField passwordText;
 	
-	private final int CONTENT_SIZE = 7;
 	private final String ID_VALID_MSG = "아이디에는 숫자만 입력할 수 있습니다";
 	private final String ID_BLANK_MSG = "아이디를 입력하세요";
 	private final String PSWD_BLANK_MSG = "비밀번호를 입력하세요"; 
