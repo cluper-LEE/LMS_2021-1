@@ -9,7 +9,7 @@ public class VMainPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	// components
-	private VEnrollment vEnrollment;
+	private VLectureSearch vLectureSearch;
 	
 	public VMainPanel() {
 		super();
@@ -17,8 +17,8 @@ public class VMainPanel extends JPanel{
 		this.setBackground(FVMainPanel.backgroundColor);
 		
 		// components
-		this.vEnrollment = new VEnrollment();
-		this.add(this.vEnrollment);
+		this.vLectureSearch = new VLectureSearch();
+		this.add(this.vLectureSearch);
 	}
 
 }

@@ -39,8 +39,7 @@ public class OLecture extends OIndex {
 	public String toString() {
 		return super.getId() + " " + super.getName() + " " + profName + " " + credit + " " + time;
 	}
-
-
+	
 	@Override
 	public String getId() {
 		// TODO Auto-generated method stub

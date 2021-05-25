@@ -58,8 +58,8 @@ public class MTime {
 
 	public static String getNormalizedTime(String time) {
 		time = time.replace(":", "");
+		time = time.replace("~", "-");
 		String ret = "";
-		System.out.println(time);
 		if (time.contains(",")) {
 			String[] times = time.split(",");
 			String day1 = times[0].substring(0, 1);
@@ -78,6 +78,12 @@ public class MTime {
 				ret = "__" + time;
 			} else {
 				ret = time;
+			}
+		}
+		
+		if(ret.length() > 20) {
+			if(ret.substring(1,10).equals(ret.substring(12))) {
+				ret = ret.substring(0,1) + ret.substring(11,12) + ret.substring(1,10);
 			}
 		}
 		return ret;

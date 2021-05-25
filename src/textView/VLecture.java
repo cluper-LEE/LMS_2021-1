@@ -1,22 +1,37 @@
 package textView;
 
 import java.util.Scanner;
+import java.util.Vector;
 
 import control.CLecture;
 import valueObject.OIndex;
 import valueObject.OLecture;
 
-public class VLecture extends VIndex {
-
-	CLecture cLecture;
+public class VLecture{
+	protected Scanner scanner;
+	private CLecture cLecture;
+	
+	public VLecture() {}
+	
 	
 	public VLecture(Scanner scanner) {
 		this.scanner = scanner;
-		this.cIndex = this.cLecture = new CLecture();
+		this.cLecture = new CLecture();
 	}
 
 	public OIndex show(String id, String fileName, String message) {
-		OLecture oLecture = (OLecture)super.show(fileName, message);
+		
+		Vector<OLecture> lectures = cLecture.getAll(fileName);
+		for(OLecture lecture : lectures) {
+			System.out.println(lecture.toString());
+		}
+		OLecture oLecture = new OLecture();
+		for(OLecture lecture : lectures) {
+			if(lecture.getId().equals(id)) {
+				oLecture = lecture;
+			}
+		}
+		
 		while (true) {
 			System.out.println("즉시 신청(1), 미리 담기(2), 취소(0)");
 			String input = scanner.next();

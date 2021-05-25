@@ -1,6 +1,11 @@
 package windowsView;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import constants.Config.FVMainFrame;
 
@@ -9,10 +14,8 @@ public class VMainFrame extends JFrame {
 	private static final long serialVersionUID = 100L;
 	
 	// components
+	private VLogin vLogin;
 	private VMainPanel vMainPanel;
-	
-//	private VLogin vLogin;
-//	private VLectureSearch vLectureSearch;
 	
 	public VMainFrame() {
 		super();
@@ -22,16 +25,17 @@ public class VMainFrame extends JFrame {
 		this.setLocation(FVMainFrame.location);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		// components
-		this.vMainPanel = new VMainPanel();
-		this.add(this.vMainPanel);
-//		this.vLogin = new VLogin();
-//		this.vLectureSearch = new VLectureSearch();
+		this.vLogin = new VLogin(this);
+		this.pack();
+		
+	}
+	
+	public void setMainPanel(VMainPanel panel) {
+		this.vMainPanel = panel;
 	}
 
 	public static void main(String[] args) {
 		VMainFrame vMain = new VMainFrame();
-		vMain.setVisible(true);
 	}
 
 }

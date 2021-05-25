@@ -7,21 +7,36 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Vector;
 
 import model.MLecture;
 import model.MTime;
 import valueObject.OLecture;
 
-public class DLecture extends DIndex {
-
+public class DLecture{
+	public static final String LECTURE_PATH = "lectures/";
 	public static final String BASKET_PATH = "baskets/";
 	public static final String ENROLLMENT_PATH = "enrollment_lists/";
-
+	
 	private MLecture mLecture;
 
 	public DLecture() {
-		super.oIndex = new OLecture();
-		super.mIndex = new MLecture();
+		this.mLecture = new MLecture();
+	}
+	
+	public Vector<OLecture> readAll(String fileName) {
+		Vector<OLecture> lectures = new Vector<>();
+		File file = new File(LECTURE_PATH + fileName);
+		try (Scanner scanner = new Scanner(file);) {
+			while (mLecture.read(scanner)) {
+				OLecture oLecture = new OLecture();
+				oLecture.set(mLecture);
+				lectures.add(oLecture);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lectures;
 	}
 
 	public void save(String id, OLecture oLecture) {

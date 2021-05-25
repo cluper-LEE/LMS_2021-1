@@ -30,6 +30,15 @@ public class MLecture extends MIndex {
 			this.profName = scanner.next();
 			this.credit = scanner.next();
 			this.time = MTime.getNormalizedTime(scanner.next());
+			
+			// 강좌 데이터 순서가 다른 경우가 있음.
+			if(this.credit.contains("-")) {
+				String temp = this.credit;
+				this.credit = this.profName;
+				this.profName = this.time;
+				this.time = temp;
+			}
+			
 			return true;
 		}
 		return false;
