@@ -18,6 +18,7 @@ public class CLogin {
 				return oMember;
 			}
 		}
+		System.out.println("찾는 멤버 없음");
 		return null;
 	}
 

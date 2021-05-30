@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import constants.Config.FVLectureSearch;
 import valueObject.OIndex;
 import valueObject.OLecture;
+import valueObject.OMember;
 
 public class VLectureSearch extends JPanel {
 	// attributes
@@ -83,7 +84,14 @@ public class VLectureSearch extends JPanel {
 				System.out.println("최종선택 : " + oLecture);
 			}
 		});
+		
+	}
 
+	public void init(OMember oMember) {
+		this.vCampusTable.init();
+		this.vCollegeTable.init();
+		this.vDepartmentTable.init();
+		this.vLectrueTable.init();
 	}
 
 }

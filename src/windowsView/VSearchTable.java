@@ -14,7 +14,7 @@ public class VSearchTable extends JTable {
 	private static final long serialVersionUID = 1L;
 	private Vector<OIndex> indicies;
 	private String[] colName;
-	
+
 	private CIndex cIndex;
 
 	public VSearchTable(String fileName, String... colName) {
@@ -23,9 +23,9 @@ public class VSearchTable extends JTable {
 		this.cIndex = new CIndex();
 		this.colName = colName;
 		this.set(fileName);
-		
+
 	}
-	
+
 	public void set(String fileName) {
 		this.indicies = this.cIndex.getAll(fileName);
 		String[][] data = new String[indicies.size()][1];
@@ -33,19 +33,25 @@ public class VSearchTable extends JTable {
 			OIndex oIndex = indicies.get(i);
 			data[i][0] = oIndex.getName();
 		}
-
+		
 		DefaultTableModel model = new DefaultTableModel(data, colName);
 		this.setModel(model);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
-	
+
+	public void init() {
+		DefaultTableModel model = new DefaultTableModel();
+		this.setModel(model);
+		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	}
+
 	public OIndex getSelected() {
-		if(this.getSelectedRow() == -1) {
+		if (this.getSelectedRow() == -1) {
 			this.changeSelection(0, 0, false, false);
 		}
 		return indicies.get(this.getSelectedRow());
 	}
-	
+
 	public String getColName() {
 		return colName[0];
 	}
