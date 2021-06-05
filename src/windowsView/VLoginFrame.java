@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import constants.Config.FVForm;
 import constants.Config.FVLogin;
 import control.CLogin;
 import global.Global;
@@ -43,11 +44,11 @@ public class VLoginFrame extends JFrame {
 
 		// 입력 패널 내용 채우기
 		JLabel idLabel = new JLabel(FVLogin.idLabelText);
-		this.idText = new JTextField(FVLogin.textFieldLength);
+		this.idText = new JTextField(FVForm.textFieldLength);
 		topPanel.addInputRow(idLabel, idText);
 
 		JLabel passwordLabel = new JLabel(FVLogin.passwordLabelText);
-		this.passwordText = new JPasswordField(FVLogin.textFieldLength);
+		this.passwordText = new JPasswordField(FVForm.textFieldLength);
 		topPanel.addInputRow(passwordLabel, passwordText);
 
 		// 버튼 패널 내용 채우기

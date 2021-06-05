@@ -2,6 +2,7 @@ package control;
 
 import java.util.Vector;
 
+import constants.Config.FCLectureControl;
 import dataAccessObject.DLecture;
 import valueObject.OLecture;
 
@@ -14,15 +15,16 @@ public class CLecture{
 	}
 
 	public Vector<OLecture> getAll(String fileName) {
-		Vector<OLecture> indeices = this.dLecture.readAll(fileName);
-		return indeices;
+		Vector<OLecture> lectures = this.dLecture.readAll(fileName);
+		return lectures;
 	}
-	public void saveLecture(String id, OLecture oLecture) {
-		this.dLecture.save(id, oLecture);
+	
+	public FCLectureControl saveInEnrollmentList(String id, OLecture oLecture) {
+		return this.dLecture.saveInEnrollmentList(id, oLecture);
 	}
 
-	public void saveLectureInBasket(String id, OLecture oLecture) {
-		this.dLecture.saveInBasket(id, oLecture);
+	public FCLectureControl saveInBasket(String id, OLecture oLecture) {
+		return this.dLecture.saveInBasket(id, oLecture);
 	}
 
 }

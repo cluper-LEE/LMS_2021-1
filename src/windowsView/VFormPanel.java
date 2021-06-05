@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import constants.Config.FVLogin;
+import constants.Config.FVForm;
 import global.Global;
 
 public class VFormPanel extends JPanel {
@@ -33,7 +33,7 @@ public class VFormPanel extends JPanel {
 		// 최상위 > 메시지
 		// 아이디가 올바른 형식인지 알려주는 메시지
 		validText = new JLabel(" ");
-		validText.setForeground(FVLogin.validTextColor);
+		validText.setForeground(FVForm.validTextColor);
 		this.add(validText);
 
 		// 최상위 > 버튼 패널
@@ -43,17 +43,17 @@ public class VFormPanel extends JPanel {
 	}
 	
 	public void addInputRow(JLabel label, JTextField textField) {
-		GridBagConstraints labelGbc = Global.getGbc(0, inputRowCount);
+		GridBagConstraints labelGbc = Global.getGbc(FVForm.labelGridX, inputRowCount);
 		inputPanel.add(label, labelGbc);
 		
-		GridBagConstraints textGbc = Global.getGbc(1, inputRowCount, 4, 1);
+		GridBagConstraints textGbc = Global.getGbc(FVForm.textFieldGridX, inputRowCount, FVForm.textFieldWidht, FVForm.textFieldHeight);
 		inputPanel.add(textField, textGbc);
 		
 		inputRowCount++;
 	}
 	
 	public void addButton(JButton button) {
-		buttonPanel.add(button, Global.getGbc(0, buttonRowCount++, 5, 1));
+		buttonPanel.add(button, Global.getGbc(FVForm.buttonGridX, buttonRowCount++, FVForm.buttonWidht, FVForm.buttonHeight));
 	}
 	
 	public JLabel getValidText() {

@@ -46,9 +46,8 @@ public class MLecture extends MIndex {
 
 	public void save(BufferedWriter bufferedWriter, OLecture oLecture) {
 		try {
-			String s = String.join("\n", oLecture.toString().split(" "));
-			s += "\n";
-			bufferedWriter.write(s);
+			String data = oLecture.toString() + "\n";
+			bufferedWriter.write(data);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

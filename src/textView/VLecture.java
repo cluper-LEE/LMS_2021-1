@@ -3,6 +3,7 @@ package textView;
 import java.util.Scanner;
 import java.util.Vector;
 
+import constants.Config.FPath;
 import control.CLecture;
 import valueObject.OIndex;
 import valueObject.OLecture;
@@ -21,7 +22,7 @@ public class VLecture{
 
 	public OIndex show(String id, String fileName, String message) {
 		
-		Vector<OLecture> lectures = cLecture.getAll(fileName);
+		Vector<OLecture> lectures = cLecture.getAll(FPath.lecturesPath + fileName);
 		for(OLecture lecture : lectures) {
 			System.out.println(lecture.toString());
 		}
@@ -39,11 +40,11 @@ public class VLecture{
 				break;
 			} else if (input.equals("1")) {
 				// 수강 신청 내역에 추가
-				this.cLecture.saveLecture(id, oLecture);
+				this.cLecture.saveInEnrollmentList(id, oLecture);
 				break;
 			} else if (input.equals("2")) {
 				// 미리 담기 내역에 추가
-				this.cLecture.saveLectureInBasket(id, oLecture);
+				this.cLecture.saveInBasket(id, oLecture);
 				break;
 			} else {
 				System.out.println("잘못된 입력입니다.");

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
 
+import constants.Config.FCLectureControl;
 import model.MLecture;
 import model.MTime;
 import valueObject.OLecture;
@@ -23,10 +24,10 @@ public class DLecture{
 	public DLecture() {
 		this.mLecture = new MLecture();
 	}
-	
+
 	public Vector<OLecture> readAll(String fileName) {
 		Vector<OLecture> lectures = new Vector<>();
-		File file = new File(LECTURE_PATH + fileName);
+		File file = new File(fileName);
 		try (Scanner scanner = new Scanner(file);) {
 			while (mLecture.read(scanner)) {
 				OLecture oLecture = new OLecture();
@@ -39,22 +40,28 @@ public class DLecture{
 		return lectures;
 	}
 
-	public void save(String id, OLecture oLecture) {
-		this.saveInFile(DLecture.ENROLLMENT_PATH + id, oLecture);
+	public FCLectureControl saveInEnrollmentList(String id, OLecture oLecture) {
+		FCLectureControl result = this.saveInFile(DLecture.ENROLLMENT_PATH + id, oLecture);
+		if(result == FCLectureControl.ALREADY_EXIST_LECTURE) {
+			return FCLectureControl.EXIST_IN_ENROLLMENT_LIST;
+		}
+		return result; 
 	}
 
-	public boolean saveInBasket(String id, OLecture oLecture) {
-		String path = DLecture.BASKET_PATH + id;
-		this.saveInFile(path, oLecture);
-		return true;
+	public FCLectureControl saveInBasket(String id, OLecture oLecture) {
+		FCLectureControl result = this.saveInFile(DLecture.BASKET_PATH + id, oLecture);
+		if(result == FCLectureControl.ALREADY_EXIST_LECTURE) {
+			return FCLectureControl.EXIST_IN_BASKET;
+		}
+		return result; 
 	}
 
-	public boolean saveInFile(String path, OLecture oLecture) {
+	public FCLectureControl saveInFile(String path, OLecture oLecture) {
 		File file = new File(path);
 		if (file.exists()) {
-			if (this.lectureExists(path, oLecture)) {
-				// 이미 신청한 강좌라면 false 반환.
-				return false;
+			FCLectureControl result = this.validLecture(path, oLecture);
+			if (result != null) {
+				return result;
 			}
 		}
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
@@ -62,29 +69,28 @@ public class DLecture{
 			mLecture.save(bufferedWriter, oLecture);
 		} catch (IOException e) {
 			e.printStackTrace();
-			return false;
+			return FCLectureControl.FAIL_TO_SAVE_IN_FILE;
 		}
-		return true;
+		return FCLectureControl.SUCCESS;
 	}
 
-	public boolean lectureExists(String path, OLecture oLecture) {
+	public FCLectureControl validLecture(String path, OLecture oLecture) {
 		File file = new File(path);
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 			this.mLecture = new MLecture();
 			Scanner scanner = new Scanner(file);
 			while (mLecture.read(scanner)) {
 				if (mLecture.getId().equals(oLecture.getId())) {
-					return true;
+					return FCLectureControl.ALREADY_EXIST_LECTURE;
 				}
 				if (new MTime(mLecture.getTime()).checkOverlap(new MTime(oLecture.getTime()))) {
-					System.out.println("시간 중복");
-					return true;
+					return FCLectureControl.TIME_OVERlAP;
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 
 }

@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import constants.Config.FVForm;
 import constants.Config.FVLogin;
 import constants.Config.FVRegistration;
 import control.CRegistration;
@@ -44,7 +45,7 @@ public class VRegistrationFrame extends JFrame {
 		validText = topPanel.getValidText();
 
 		// 입력 패널 내용 채우기
-		int length = FVRegistration.textFieldLength;
+		int length = FVForm.textFieldLength;
 		JLabel nameLabel = new JLabel(FVRegistration.nameLabelText);
 		nameText = new JTextField(length);
 		topPanel.addInputRow(nameLabel, nameText);
